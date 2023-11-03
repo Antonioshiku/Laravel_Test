@@ -31,7 +31,7 @@ Route::prefix('user')->group(function () {
 
         Route::get('update/{id}','update')->name('user-update');
         Route::get('/delete/{id}','destroy')->name('user-delete');
-        Route::get('/destroy/{id}','delete')->name('user-destroy');
+
     });
 });
 
