@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderByDesc('id')->get();
+        $users = User::all();
 
         return view('user.index',compact('users'));
     }
@@ -50,15 +50,23 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $Post= User::find($id);
+        return view('user.edit',compact('Post'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+               User::find($id) -> update([
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'password' => $request->password
+               ]);
+
+               return redirect()->route('user-list')->with("SuccessUpdate","You have Successfully update");
     }
 
     /**
@@ -66,6 +74,14 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        return redirect()->route('user-list')->with('successDelete',"Data have been successfull delete");
+    }
+
+    public function delete(string $id)
+    {
+        User::find($id)->delete();
+
+        return redirect()->route('user-list');;
     }
 }

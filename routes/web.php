@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -27,5 +27,13 @@ Route::prefix('user')->group(function () {
         Route::get('create', 'create')->name('user-create');
 
         Route::post('/', 'store')->name('user-store');
+        Route::get('edit/{id}','edit')->name('user-edit');
+
+        Route::get('update/{id}','update')->name('user-update');
+        Route::get('/delete/{id}','destroy')->name('user-delete');
+        Route::get('/destroy/{id}','delete')->name('user-destroy');
     });
 });
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
